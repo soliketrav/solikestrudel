@@ -42,7 +42,7 @@ const bass = 0
 bassline:
 note(pick(basslines, bass))
 .sound("supersaw")
-.postgain(2)
+.postgain(<volume>)
 .room(0.6)
 .lpf(700)
 .room(0.4)

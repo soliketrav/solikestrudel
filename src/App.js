@@ -1,105 +1,105 @@
+// src/App.js
+import React, { useState, useRef, useCallback } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { useEffect, useRef } from "react";
-import { StrudelMirror } from '@strudel/codemirror';
-import { evalScope } from '@strudel/core';
-import { drawPianoroll } from '@strudel/draw';
-import { initAudioOnFirstClick } from '@strudel/webaudio';
-import { transpiler } from '@strudel/transpiler';
-import { getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
-import { registerSoundfonts } from '@strudel/soundfonts';
+import StrudelHost from './components/StrudelHost';
+import PreprocessEditor from './components/PreprocessEditor';
+import TransportControls from './components/TransportControls';
+import InstrumentControls from './components/InstrumentControls';
+import VolumeControl from './components/VolumeControl';
 import { stranger_tune } from './tunes';
-import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 
-let globalEditor = null;
+function App() {
+    // Song text the user sees/edits
+    const [songText, setSongText] = useState(stranger_tune);
 
-const handleD3Data = (event) => {
-    console.log(event.detail);
-};
+    // The “control state” for preprocessing
+    const [controls, setControls] = useState({
+        p1: 'on',        // or 'hush'
+        volume: 1.0,
+    });
 
+    // A reference to the Strudel editor
+    const editorRef = useRef(null);
 
+    // Called by StrudelHost once Strudel is ready
+    const handleEditorReady = useCallback((editorInstance) => {
+        editorRef.current = editorInstance;
+    }, []);
 
-export function ProcAndPlay() {
-    if (globalEditor != null && globalEditor.repl.state.started == true) {
-        console.log(globalEditor)
-        Proc()
-        globalEditor.evaluate();
-    }
-}
+    // Preprocessing logic
+    const runPreprocess = useCallback(() => {
+        if (!editorRef.current) return;
 
-export function Proc() {
+        let processed = songText;
 
-    let proc_text_replaced = proc_text.replaceAll('<p1_Radio>', ProcessText);
-    ProcessText(proc_text);
-    globalEditor.setCode(proc_text_replaced)
-}
+        // Replace p1 tag based on radio buttons
+        processed = processed.replaceAll('<p1_Radio>', controls.p1 === 'hush' ? '_' : '');
 
+        // Replace volume tag
+        processed = processed.replaceAll('<volume>', controls.volume.toString());
 
-export default function StrudelDemo() {
+        // Push to Strudel editor
+        editorRef.current.setCode(processed);
 
-const hasRun = useRef(false);
+        return processed;
+    }, [songText, controls]);
 
-useEffect(() => {
+    // Process + play combined
+    const handleProcAndPlay = useCallback(() => {
+        const processed = runPreprocess();
+        if (editorRef.current && editorRef.current.repl?.state?.started) {
+            editorRef.current.evaluate();
+        }
+    }, [runPreprocess]);
 
-    if (!hasRun.current) {
-        document.addEventListener("d3Data", handleD3Data);
-        console_monkey_patch();
-        hasRun.current = true;
-        //Code copied from example: https://codeberg.org/uzu/strudel/src/branch/main/examples/codemirror-repl
-            //init canvas
-            const canvas = document.getElementById('roll');
-            canvas.width = canvas.width * 2;
-            canvas.height = canvas.height * 2;
-            const drawContext = canvas.getContext('2d');
-            const drawTime = [-2, 2]; // time window of drawn haps
-            globalEditor = new StrudelMirror({
-                defaultOutput: webaudioOutput,
-                getTime: () => getAudioContext().currentTime,
-                transpiler,
-                root: document.getElementById('editor'),
-                drawTime,
-                onDraw: (haps, time) => drawPianoroll({ haps, time, ctx: drawContext, drawTime, fold: 0 }),
-                prebake: async () => {
-                    initAudioOnFirstClick(); // needed to make the browser happy (don't await this here..)
-                    const loadModules = evalScope(
-                        import('@strudel/core'),
-                        import('@strudel/draw'),
-                        import('@strudel/mini'),
-                        import('@strudel/tonal'),
-                        import('@strudel/webaudio'),
-                    );
-                    await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
-                },
-            });
-            
-        Proc()
-    }
+    return (
+        <div className="container-fluid py-3">
+            <h2 className="mb-3">Strudel Reactor</h2>
+            <div className="row">
+                {/* LEFT: editor + controls */}
+                <div className="col-md-4" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+                    <PreprocessEditor
+                        value={songText}
+                        onChange={setSongText}
+                    />
 
-}, []);
+                    <div className="mt-3">
+                        <TransportControls
+                            onProcess={runPreprocess}
+                            onProcessAndPlay={handleProcAndPlay}
+                            onPlay={() => editorRef.current && editorRef.current.evaluate()}
+                            onStop={() => editorRef.current && editorRef.current.stop()}
+                        />
+                    </div>
 
+                    <div className="mt-3">
+                        <InstrumentControls
+                            p1={controls.p1}
+                            onChange={(newP1) => setControls((prev) => ({ ...prev, p1: newP1 }))}
+                            onChangeAndPlay={handleProcAndPlay}
+                        />
+                    </div>
 
-return (
-    <div>
-        <h2>Strudel Demo</h2>
-        <main>
-
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-md-4">
+                    <div className="mt-3">
+                        <VolumeControl
+                            volume={controls.volume}
+                            onChange={(newVolume) => setControls((prev) => ({ ...prev, volume: newVolume }))}
+                            onChangeAndPlay={handleProcAndPlay}
+                        />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <div id="editor" />
-                        <div id="output" />
-                    </div>
-                    <div className="col-md-4">
-                    </div>
+
+                {/* RIGHT: Strudel host */}
+                <div className="col-md-8">
+                    <StrudelHost
+                        onReady={handleEditorReady}
+                        initialCode={songText}
+                    />
                 </div>
             </div>
-            <canvas id="roll"></canvas>
-        </main >
-    </div >
-);
-
-
+        </div>
+    );
 }
+
+export default App;
