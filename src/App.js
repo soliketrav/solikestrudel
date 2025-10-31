@@ -16,23 +16,6 @@ const handleD3Data = (event) => {
     console.log(event.detail);
 };
 
-export function SetupButtons() {
-
-    document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
-    document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
-    document.getElementById('process').addEventListener('click', () => {
-        Proc()
-    }
-    )
-    document.getElementById('process_play').addEventListener('click', () => {
-        if (globalEditor != null) {
-            Proc()
-            globalEditor.evaluate()
-        }
-    }
-    )
-}
-
 
 
 export function ProcAndPlay() {
@@ -97,7 +80,6 @@ useEffect(() => {
                 },
             });
             
-        SetupButtons()
         Proc()
     }
 
@@ -112,14 +94,6 @@ return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-4">
-
-                        <nav>
-                            <button id="process" className="btn btn-outline-primary">Preprocess</button>
-                            <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
-                            <br />
-                            <button id="play" className="btn btn-outline-primary">Play</button>
-                            <button id="stop" className="btn btn-outline-primary">Stop</button>
-                        </nav>
                     </div>
                 </div>
                 <div className="row">
