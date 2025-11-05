@@ -52,8 +52,8 @@ function App() {
 
     // Process + play combined
     const handleProcAndPlay = useCallback(() => {
-        const processed = runPreprocess();
-        if (editorRef.current && editorRef.current.repl?.state?.started) {
+        runPreprocess();
+        if (editorRef.current) {
             editorRef.current.evaluate();
         }
     }, [runPreprocess]);
