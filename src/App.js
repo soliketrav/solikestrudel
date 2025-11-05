@@ -7,6 +7,7 @@ import PreprocessEditor from './components/PreprocessEditor';
 import TransportControls from './components/TransportControls';
 import InstrumentControls from './components/InstrumentControls';
 import VolumeControl from './components/VolumeControl';
+import TempoControl from './components/TempoControl';
 import { stranger_tune } from './tunes';
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
 
     // The “control state” for preprocessing
     const [controls, setControls] = useState({
-        p1: 'on',        // or 'hush'
+        p1: 'on',
         volume: 1.0,
+        tempo: 120,
     });
 
     // A reference to the Strudel editor
@@ -38,6 +40,9 @@ function App() {
 
         // Replace volume tag
         processed = processed.replaceAll('<volume>', controls.volume.toString());
+
+        // Replace tempo tag
+        processed = processed.replaceAll('<tempo>', controls.tempo.toString());
 
         // Push to Strudel editor
         editorRef.current.setCode(processed);
@@ -69,14 +74,14 @@ function App() {
             {/* Top control bar */}
             <div className="bg-body-tertiary border rounded-3 p-3 mb-3">
                 <div className="d-flex flex-wrap justify-content-center align-items-center gap-4">
-                    {/* Instruments (left group) */}
+                    {/* Instruments */}
                     <InstrumentControls
                         p1={controls.p1}
                         onChange={(newP1) => setControls((prev) => ({ ...prev, p1: newP1 }))}
                         onChangeAndPlay={handleProcAndPlay}
                     />
 
-                    {/* Transport (middle group) */}
+                    {/* Transport */}
                     <TransportControls
                         onProcess={runPreprocess}
                         onProcessAndPlay={handleProcAndPlay}
@@ -84,11 +89,20 @@ function App() {
                         onStop={() => editorRef.current && editorRef.current.stop()}
                     />
 
-                    {/* Volume (right group) */}
+                    {/* Volume */}
                     <div style={{ minWidth: 240 }}>
                         <VolumeControl
                             volume={controls.volume}
                             onChange={(newVolume) => setControls((prev) => ({ ...prev, volume: newVolume }))}
+                        />
+                    </div>
+
+                    {/* Tempo */}
+                    <div style={{ minWidth: 240 }}>
+                        <TempoControl
+                            tempo={controls.tempo}
+                            onChange={(newTempo) => setControls(prev => ({ ...prev, tempo: newTempo }))}
+                            onChangeAndPlay={handleProcAndPlay}
                         />
                     </div>
                 </div>
