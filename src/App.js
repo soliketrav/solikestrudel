@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import StrudelHost from './components/StrudelHost';
@@ -53,49 +53,70 @@ function App() {
         }
     }, [runPreprocess]);
 
+    // Re-run preprocess & (if started) re-evaluate when volume changes
+    useEffect(() => {
+        if (!editorRef.current) return;
+        runPreprocess();
+        if (editorRef.current.repl?.state?.started) {
+            editorRef.current.evaluate();
+        }
+    }, [controls.volume, runPreprocess]);
+
     return (
         <div className="container-fluid py-3">
             <h2 className="mb-3">Strudel Reactor</h2>
             <div className="row">
                 {/* LEFT: editor + controls */}
                 <div className="col-md-4" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
-                    <PreprocessEditor
-                        value={songText}
-                        onChange={setSongText}
-                    />
-
-                    <div className="mt-3">
-                        <TransportControls
-                            onProcess={runPreprocess}
-                            onProcessAndPlay={handleProcAndPlay}
-                            onPlay={() => editorRef.current && editorRef.current.evaluate()}
-                            onStop={() => editorRef.current && editorRef.current.stop()}
-                        />
+                    <div className="card mb-3">
+                        <div className="card-header">Preprocessor</div>
+                        <div className="card-body">
+                            <PreprocessEditor value={songText} onChange={setSongText} />
+                        </div>
                     </div>
 
-                    <div className="mt-3">
-                        <InstrumentControls
-                            p1={controls.p1}
-                            onChange={(newP1) => setControls((prev) => ({ ...prev, p1: newP1 }))}
-                            onChangeAndPlay={handleProcAndPlay}
-                        />
+                    <div className="card mb-3">
+                        <div className="card-header">Transport</div>
+                        <div className="card-body">
+                            <TransportControls
+                                onProcess={runPreprocess}
+                                onProcessAndPlay={handleProcAndPlay}
+                                onPlay={() => editorRef.current && editorRef.current.evaluate()}
+                                onStop={() => editorRef.current && editorRef.current.stop()}
+                            />
+                        </div>
                     </div>
 
-                    <div className="mt-3">
-                        <VolumeControl
-                            volume={controls.volume}
-                            onChange={(newVolume) => setControls((prev) => ({ ...prev, volume: newVolume }))}
-                            onChangeAndPlay={handleProcAndPlay}
-                        />
+                    <div className="card mb-3">
+                        <div className="card-header">Instruments</div>
+                        <div className="card-body">
+                            <InstrumentControls
+                                p1={controls.p1}
+                                onChange={(newP1) => setControls((prev) => ({ ...prev, p1: newP1 }))}
+                                onChangeAndPlay={handleProcAndPlay}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="card mb-3">
+                        <div className="card-header">Mix</div>
+                        <div className="card-body">
+                            <VolumeControl
+                                volume={controls.volume}
+                                onChange={(newVolume) => setControls((prev) => ({ ...prev, volume: newVolume }))}
+                            />
+                        </div>
                     </div>
                 </div>
 
                 {/* RIGHT: Strudel host */}
                 <div className="col-md-8">
-                    <StrudelHost
-                        onReady={handleEditorReady}
-                        initialCode={songText}
-                    />
+                    <div className="card">
+                        <div className="card-header">Strudel Editor & Pianoroll</div>
+                        <div className="card-body">
+                            <StrudelHost onReady={handleEditorReady} initialCode={songText} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

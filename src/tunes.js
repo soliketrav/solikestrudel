@@ -42,7 +42,7 @@ const bass = 0
 bassline:
 note(pick(basslines, bass))
 .sound("supersaw")
-.postgain(<volume>)
+.postgain(6)
 .room(0.6)
 .lpf(700)
 .room(0.4)
@@ -93,6 +93,9 @@ stack(
   .speed(0.5)
   .rarely(jux(rev)),
 )
+
+all(x => x.postgain(<volume>))
+
 //Remixed and reproduced from Algorave Dave's code found here: https://www.youtube.com/watch?v=ZCcpWzhekEY
 // all(x => x.gain(mouseX.range(0,1)))
 // all(x => x.log())

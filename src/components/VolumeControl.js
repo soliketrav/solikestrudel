@@ -5,8 +5,9 @@ export default function VolumeControl({ volume, onChange, onChangeAndPlay }) {
     const handleChange = (e) => {
         const newVal = Number(e.target.value);
         onChange(newVal);
-        if (onChangeAndPlay) onChangeAndPlay();
     };
+
+    const displayVolume = Math.round(volume * 100);
 
     return (
         <div>
@@ -16,11 +17,11 @@ export default function VolumeControl({ volume, onChange, onChangeAndPlay }) {
                 className="form-range"
                 min="0"
                 max="2"
-                step="0.1"
+                step="0.01"
                 value={volume}
                 onChange={handleChange}
             />
-            <small className="text-muted">Current: {volume.toFixed(1)}</small>
+            <small className="text-muted">Current: {displayVolume}</small>
         </div>
     );
 }
