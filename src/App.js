@@ -64,54 +64,49 @@ function App() {
 
     return (
         <div className="container-fluid py-3">
-            <h2 className="mb-3">Strudel Reactor</h2>
-            <div className="row">
-                {/* LEFT: editor + controls */}
-                <div className="col-md-4" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
-                    <div className="card mb-3">
+            <h2 className="mb-3 text-center">Strudel Reactor</h2>
+
+            {/* Top control bar */}
+            <div className="bg-body-tertiary border rounded-3 p-3 mb-3">
+                <div className="d-flex flex-wrap justify-content-center align-items-center gap-4">
+                    {/* Instruments (left group) */}
+                    <InstrumentControls
+                        p1={controls.p1}
+                        onChange={(newP1) => setControls((prev) => ({ ...prev, p1: newP1 }))}
+                        onChangeAndPlay={handleProcAndPlay}
+                    />
+
+                    {/* Transport (middle group) */}
+                    <TransportControls
+                        onProcess={runPreprocess}
+                        onProcessAndPlay={handleProcAndPlay}
+                        onPlay={() => editorRef.current && editorRef.current.evaluate()}
+                        onStop={() => editorRef.current && editorRef.current.stop()}
+                    />
+
+                    {/* Volume (right group) */}
+                    <div style={{ minWidth: 240 }}>
+                        <VolumeControl
+                            volume={controls.volume}
+                            onChange={(newVolume) => setControls((prev) => ({ ...prev, volume: newVolume }))}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            {/* Editor and host */}
+            <div className="row g-3">
+                <div className="col-md-6">
+                    <div className="card h-100">
                         <div className="card-header">Preprocessor</div>
                         <div className="card-body">
                             <PreprocessEditor value={songText} onChange={setSongText} />
                         </div>
                     </div>
-
-                    <div className="card mb-3">
-                        <div className="card-header">Transport</div>
-                        <div className="card-body">
-                            <TransportControls
-                                onProcess={runPreprocess}
-                                onProcessAndPlay={handleProcAndPlay}
-                                onPlay={() => editorRef.current && editorRef.current.evaluate()}
-                                onStop={() => editorRef.current && editorRef.current.stop()}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="card mb-3">
-                        <div className="card-header">Instruments</div>
-                        <div className="card-body">
-                            <InstrumentControls
-                                p1={controls.p1}
-                                onChange={(newP1) => setControls((prev) => ({ ...prev, p1: newP1 }))}
-                                onChangeAndPlay={handleProcAndPlay}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="card mb-3">
-                        <div className="card-header">Mix</div>
-                        <div className="card-body">
-                            <VolumeControl
-                                volume={controls.volume}
-                                onChange={(newVolume) => setControls((prev) => ({ ...prev, volume: newVolume }))}
-                            />
-                        </div>
-                    </div>
                 </div>
 
-                {/* RIGHT: Strudel host */}
-                <div className="col-md-8">
-                    <div className="card">
+                <div className="col-md-6">
+                    <div className="card h-100">
                         <div className="card-header">Strudel Editor & Pianoroll</div>
                         <div className="card-body">
                             <StrudelHost onReady={handleEditorReady} initialCode={songText} />
