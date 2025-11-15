@@ -8,6 +8,7 @@ import TransportControls from './components/TransportControls';
 import InstrumentControls from './components/InstrumentControls';
 import VolumeControl from './components/VolumeControl';
 import TempoControl from './components/TempoControl';
+import AdvancedControlsAccordion from './components/AdvancedControlsAccordion';
 import { stranger_tune } from './tunes';
 
 function App() {
@@ -89,20 +90,18 @@ function App() {
                         onStop={() => editorRef.current && editorRef.current.stop()}
                     />
 
-                    {/* Volume */}
-                    <div style={{ minWidth: 240 }}>
-                        <VolumeControl
+                    {/* Advanced Controls Accordion */}
+                    <div style={{ minWidth: 320 }}>
+                        <AdvancedControlsAccordion
                             volume={controls.volume}
-                            onChange={(newVolume) => setControls((prev) => ({ ...prev, volume: newVolume }))}
-                        />
-                    </div>
-
-                    {/* Tempo */}
-                    <div style={{ minWidth: 240 }}>
-                        <TempoControl
                             tempo={controls.tempo}
-                            onChange={(newTempo) => setControls(prev => ({ ...prev, tempo: newTempo }))}
-                            onChangeAndPlay={handleProcAndPlay}
+                            onVolumeChange={(newVolume) =>
+                                setControls((prev) => ({ ...prev, volume: newVolume }))
+                            }
+                            onTempoChange={(newTempo) =>
+                                setControls((prev) => ({ ...prev, tempo: newTempo }))
+                            }
+                            onProcAndPlay={handleProcAndPlay}
                         />
                     </div>
                 </div>
