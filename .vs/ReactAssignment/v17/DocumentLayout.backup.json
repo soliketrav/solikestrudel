@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\components\\tempocontrol.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\tempocontrol.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\tunes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -22,11 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "TempoControl.js",
               "DocumentMoniker": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\components\\TempoControl.js",
               "RelativeDocumentMoniker": "src\\components\\TempoControl.js",
@@ -45,20 +45,20 @@
               "RelativeDocumentMoniker": "src\\tunes.js",
               "ToolTip": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\tunes.js",
               "RelativeToolTip": "src\\tunes.js",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-10-31T09:05:23.922Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "App.js",
               "DocumentMoniker": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\App.js",
               "RelativeDocumentMoniker": "src\\App.js",
               "ToolTip": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\App.js",
               "RelativeToolTip": "src\\App.js",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAIwG0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwBEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-10-31T07:52:44.285Z",
               "EditorCaption": ""

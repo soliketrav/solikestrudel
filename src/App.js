@@ -17,7 +17,12 @@ function App() {
 
     // The “control state” for preprocessing
     const [controls, setControls] = useState({
-        p1: 'on',
+        instruments: {
+            bassline: true,
+            mainArp: true,
+            drums: true,
+            drums2: true,
+        },
         volume: 1.0,
         tempo: 120,
     });
@@ -36,20 +41,22 @@ function App() {
 
         let processed = songText;
 
-        // Replace p1 tag based on radio buttons
-        processed = processed.replaceAll('<p1_Radio>', controls.p1 === 'hush' ? '_' : '');
+        const { instruments, volume, tempo } = controls;
 
-        // Replace volume tag
-        processed = processed.replaceAll('<volume>', controls.volume.toString());
+        processed = processed
+            // Instrument gains: 1 = on, 0 = muted
+            .replaceAll('<inst_bassline>', instruments.bassline ? '1' : '0')
+            .replaceAll('<inst_main_arp>', instruments.mainArp ? '1' : '0')
+            .replaceAll('<inst_drums>', instruments.drums ? '1' : '0')
+            .replaceAll('<inst_drums2>', instruments.drums2 ? '1' : '0')
+            // Advanced controls
+            .replaceAll('<volume>', volume.toString())
+            .replaceAll('<tempo>', tempo.toString());
 
-        // Replace tempo tag
-        processed = processed.replaceAll('<tempo>', controls.tempo.toString());
-
-        // Push to Strudel editor
         editorRef.current.setCode(processed);
-
         return processed;
     }, [songText, controls]);
+
 
     // Process + play combined
     const handleProcAndPlay = useCallback(() => {
@@ -74,22 +81,29 @@ function App() {
 
             {/* Top control bar */}
             <div className="bg-body-tertiary border rounded-3 p-3 mb-3">
-                <div className="d-flex flex-wrap justify-content-center align-items-center gap-4">
-                    {/* Instruments */}
-                    <InstrumentControls
-                        p1={controls.p1}
-                        onChange={(newP1) => setControls((prev) => ({ ...prev, p1: newP1 }))}
-                        onChangeAndPlay={handleProcAndPlay}
-                    />
+                <div className="d-flex flex-wrap justify-content-center align-items-start gap-4">
+                    {/* Left column */}
+                    <div className="d-flex flex-column align-items-start gap-3">
+                        {/* Transport */}
+                        <TransportControls
+                            onProcess={runPreprocess}
+                            onProcessAndPlay={handleProcAndPlay}
+                            onPlay={() => editorRef.current && editorRef.current.evaluate()}
+                            onStop={() => editorRef.current && editorRef.current.stop()}
+                        />
 
-                    {/* Transport */}
-                    <TransportControls
-                        onProcess={runPreprocess}
-                        onProcessAndPlay={handleProcAndPlay}
-                        onPlay={() => editorRef.current && editorRef.current.evaluate()}
-                        onStop={() => editorRef.current && editorRef.current.stop()}
-                    />
+                        {/* Instruments */}
+                        <InstrumentControls
+                            instruments={controls.instruments}
+                            onChange={(updatedInstruments) =>
+                                setControls((prev) => ({ ...prev, instruments: updatedInstruments }))
+                            }
+                            onChangeAndPlay={handleProcAndPlay}
+                        />
 
+                    </div>
+
+                    {/* Right column */}
                     {/* Advanced Controls Accordion */}
                     <div style={{ minWidth: 320 }}>
                         <AdvancedControlsAccordion

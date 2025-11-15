@@ -47,6 +47,7 @@ note(pick(basslines, bass))
 .lpf(700)
 .room(0.4)
 .postgain(pick(gain_patterns, pattern))
+.gain(<inst_bassline>)
 
 
 main_arp: 
@@ -57,6 +58,7 @@ note(pick(arpeggiator1, "<0 1 2 3>/2"))
 .room(0.6)
 .lpenv(3.3)
 .postgain(pick(gain_patterns, pattern))
+.gain(<inst_main_arp>)
 
 
 drums:
@@ -76,6 +78,7 @@ stack(
   .bank("[KorgDDM110, OberheimDmx]").speed(1.2)
   .postgain(.25),
 )
+.gain(<inst_drums>)
 
 drums2: 
 stack(
@@ -93,6 +96,7 @@ stack(
   .speed(0.5)
   .rarely(jux(rev)),
 )
+.gain(<inst_drums2>)
 
 all(x => x.postgain(<volume>))
 all(x => x.fast(<tempo>/120))

@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.accordion-button {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+
+.accordion-body {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
