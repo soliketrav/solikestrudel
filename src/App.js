@@ -9,6 +9,7 @@ import InstrumentControls from './components/InstrumentControls';
 import VolumeControl from './components/VolumeControl';
 import TempoControl from './components/TempoControl';
 import AdvancedControlsAccordion from './components/AdvancedControlsAccordion';
+import PresetControls from './components/PresetControls';
 import { stranger_tune } from './tunes';
 
 function App() {
@@ -66,6 +67,16 @@ function App() {
         }
     }, [runPreprocess]);
 
+    // JSON save/load
+    const handlePresetLoaded = useCallback((preset) => {
+        if (preset.songText) {
+            setSongText(preset.songText);
+        }
+        if (preset.controls) {
+            setControls(preset.controls);
+        }
+    }, []);
+
     // Re-run preprocess & (if started) re-evaluate when volume changes
     useEffect(() => {
         if (!editorRef.current) return;
@@ -119,6 +130,15 @@ function App() {
                         />
                     </div>
                 </div>
+            </div>
+
+            {/* Presets (JSON save/load) */}
+            <div className="mb-3">
+                <PresetControls
+                    controls={controls}
+                    songText={songText}
+                    onPresetLoaded={handlePresetLoaded}
+                />
             </div>
 
             {/* Editor and host */}

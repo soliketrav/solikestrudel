@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\components\\advancedcontrolsaccordion.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\advancedcontrolsaccordion.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\components\\presetcontrols.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\presetcontrols.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\components\\instrumentcontrols.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\instrumentcontrols.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -17,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|c:\\users\\tmidd\\desktop\\web technology\\react assignment\\solikestrudel\\src\\components\\advancedcontrolsaccordion.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{1C538C04-AF09-44AC-9272-6DDEAA808F25}|ReactAssignment.esproj|solutionrelative:src\\components\\advancedcontrolsaccordion.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +34,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "PresetControls.js",
+              "DocumentMoniker": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\components\\PresetControls.js",
+              "RelativeDocumentMoniker": "src\\components\\PresetControls.js",
+              "ToolTip": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\components\\PresetControls.js",
+              "RelativeToolTip": "src\\components\\PresetControls.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-11-16T05:53:15.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "InstrumentControls.js",
               "DocumentMoniker": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\components\\InstrumentControls.js",
               "RelativeDocumentMoniker": "src\\components\\InstrumentControls.js",
               "ToolTip": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\components\\InstrumentControls.js",
               "RelativeToolTip": "src\\components\\InstrumentControls.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAwEYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-15T13:01:41.404Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "tunes.js",
               "DocumentMoniker": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\tunes.js",
               "RelativeDocumentMoniker": "src\\tunes.js",
@@ -60,7 +77,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "App.css",
               "DocumentMoniker": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\App.css",
               "RelativeDocumentMoniker": "src\\App.css",
@@ -73,13 +90,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "AdvancedControlsAccordion.js",
               "DocumentMoniker": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\components\\AdvancedControlsAccordion.js",
               "RelativeDocumentMoniker": "src\\components\\AdvancedControlsAccordion.js",
               "ToolTip": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\components\\AdvancedControlsAccordion.js",
               "RelativeToolTip": "src\\components\\AdvancedControlsAccordion.js",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAwDcAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-11-15T08:59:37.072Z",
               "EditorCaption": ""
@@ -92,7 +109,7 @@
               "RelativeDocumentMoniker": "src\\App.js",
               "ToolTip": "C:\\Users\\tmidd\\Desktop\\Web Technology\\React Assignment\\solikestrudel\\src\\App.js",
               "RelativeToolTip": "src\\App.js",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAQwGYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAIwEUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-10-31T07:52:44.285Z",
               "EditorCaption": ""
