@@ -10,6 +10,7 @@ import VolumeControl from './components/VolumeControl';
 import TempoControl from './components/TempoControl';
 import AdvancedControlsAccordion from './components/AdvancedControlsAccordion';
 import PresetControls from './components/PresetControls';
+import D3LogGraph from './components/D3LogGraph';
 import { stranger_tune } from './tunes';
 
 function App() {
@@ -157,6 +158,18 @@ function App() {
                         <div className="card-header">Strudel Editor & Pianoroll</div>
                         <div className="card-body">
                             <StrudelHost onReady={handleEditorReady} initialCode={songText} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* D3 Graph row */}
+            <div className="row g-3 mt-3">
+                <div className="col-12">
+                    <div className="card h-100">
+                        <div className="card-header">Live D3 Graph</div>
+                        <div className="card-body">
+                            <D3LogGraph />
                         </div>
                     </div>
                 </div>
