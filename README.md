@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+Web Technology (INFT 2064) - React Assignment - Travis Middleton (midtw001)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is an extended version of a Strudel-based music sequencer built using React, Bootstrap, and D3.js. The provided scaffold was enhanced with new features, improved UI/UX, component refactoring, JSON state handling, and live graphical data visualisation. The application allows users to write algorithmic music patterns, preprocess them, play them through a Strudel engine, adjust playback controls, toggle individual instruments, save/load presets using JSON, and view a live graph of musical activity.
 
-## Available Scripts
+## Overview Of Features ##
 
-In the project directory, you can run:
+Preprocessor
 
-### `npm start`
+Users write or modify musical pattern text in the Preprocessor editor. The editor is a dedicated component (PreprocessEditor.js). When the user selects Preprocess or Proc & Play, the pattern text is transformed before being sent to Strudel for evaluation.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Transport Controls
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Playback is controlled through a set of buttons: Preprocess, Proc & Play, Play, and Stop. These controls allow preprocessing without playback, preprocessing with playback, playing the last processed pattern, and stopping playback. Transport logic is contained in TransportControls.js.
 
-### `npm test`
+Instrument Toggles
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app displays the instruments defined in the musical pattern which are: Bassline, Main Arp, Drums, and Drums 2. Each instrument can be toggled independently. Toggling applies .gain(1) or .gain(0) through preprocessing, allowing full or partial muting. This system is implemented in InstrumentControls.js with supporting definitions in tunes.js.
 
-### `npm run build`
+Advanced Controls
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A collapsible accordion groups additional controls: Master Volume (0-200%), and Tempo (BPM). These are applied during preprocessing via .postgain() for volume and .fast() for tempo. This is implemented within AdvancedControlsAccordion.js.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+JSON Presets (Save and Load)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Users can save presets containing all current control settings (volume, tempo, instrument states) and the preprocessed pattern text. Presets are stored in the browser using JSON.stringify(), JSON.parse(), and localStorage. Success and error states are indicated through Bootstrap alerts. This functionality is implemented in PresetControls.js.
 
-### `npm run eject`
+Live D3 Graph (Strudel .log() Output)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+A real time D3.js line graph visualises data produced by Strudel's .log() function during playback. The workflow is as follows: First strudel outputs logged values using .log(). console-monkey-patch.js intercepts these logs, extracts numeric values, and stores the most recent 100 entries. getD3Data() exposes these values to React. D3LogGraph.js polls this data every 250ms and renders a live-updating line graph using D3.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Component Architecture ##
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+App.js
+Global state, layout, and preprocessing pipeline
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+PreprocessEditor.js
+Editor for the pattern text
 
-## Learn More
+TransportControls.js
+Playback controls
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+InstrumentControls.js
+Instrument muting toggles
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+AdvancedControlsAccordion.js
+Container for volume/tempo settings
 
-### Code Splitting
+VolumeControl.js
+Master volume slider
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+TempoControl.js
+BPM slider
 
-### Analyzing the Bundle Size
+PresetControls.js
+Saving and loading JSON presets
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+StrudelHost.js
+Runs the Strudel REPL
 
-### Making a Progressive Web App
+D3LogGraph.js
+Real-time D3 visualisation of Strudel .log() data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+console-monkey-patch.js
+Log interception and data extraction
 
-### Advanced Configuration
+This structure ensures separation of concerns, easier maintenance, and clear data flow.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## UI and UX Design Choices ##
 
-### Deployment
+- Three-column top layout: Left column contains the D3 graph, centre column contains transport controls and instruments, and right column contains advanced controls.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Accordion used to reduce clutter.
 
-### `npm run build` fails to minify
+- Bootstrap cards used for major interface sections.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Consistent spacing and alignment with Bootstrap utilities.
+
+- Responsive layout that adapts across screen sizes.
+
+- Alerts provide immediate feedback for saving/loading presets.
+
+## Technologies Used ##
+
+React
+
+Bootstrap
+
+Strudel
+
+D3.js
+
+localStorage

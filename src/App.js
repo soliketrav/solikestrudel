@@ -6,8 +6,6 @@ import StrudelHost from './components/StrudelHost';
 import PreprocessEditor from './components/PreprocessEditor';
 import TransportControls from './components/TransportControls';
 import InstrumentControls from './components/InstrumentControls';
-import VolumeControl from './components/VolumeControl';
-import TempoControl from './components/TempoControl';
 import AdvancedControlsAccordion from './components/AdvancedControlsAccordion';
 import PresetControls from './components/PresetControls';
 import D3LogGraph from './components/D3LogGraph';
@@ -94,7 +92,12 @@ function App() {
             {/* Top control bar */}
             <div className="bg-body-tertiary border rounded-3 p-3 mb-3">
                 <div className="d-flex flex-wrap justify-content-center align-items-start gap-4">
-                    {/* Left column */}
+
+                    {/* D3 Graph */}
+                    <div style={{ minWidth: 320, maxWidth: 360 }}>
+                        <D3LogGraph />
+                    </div>
+                    
                     <div className="d-flex flex-column align-items-start gap-3">
                         {/* Transport */}
                         <TransportControls
@@ -115,7 +118,6 @@ function App() {
 
                     </div>
 
-                    {/* Right column */}
                     {/* Advanced Controls Accordion */}
                     <div style={{ minWidth: 320 }}>
                         <AdvancedControlsAccordion
@@ -158,18 +160,6 @@ function App() {
                         <div className="card-header">Strudel Editor & Pianoroll</div>
                         <div className="card-body">
                             <StrudelHost onReady={handleEditorReady} initialCode={songText} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* D3 Graph row */}
-            <div className="row g-3 mt-3">
-                <div className="col-12">
-                    <div className="card h-100">
-                        <div className="card-header">Live D3 Graph</div>
-                        <div className="card-body">
-                            <D3LogGraph />
                         </div>
                     </div>
                 </div>
